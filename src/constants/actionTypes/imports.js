@@ -1,0 +1,5 @@
+export const add = "ADD"
+export const remove = "REMOVE"
+export const clear = "CLEAR"
+export const update = "UPDATE"
+export const updatePoints = "UPDATE_POINTS"

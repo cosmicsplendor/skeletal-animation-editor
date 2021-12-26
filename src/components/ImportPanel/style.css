@@ -1,0 +1,91 @@
+.importPanel {
+    display: flex;
+    align-items: center;
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 1em;
+    padding: 8px;
+}
+
+.importsContainer {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    flex-grow: 1;
+    padding: 5px;
+}
+
+.importsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.importPanelItem {
+    height: 80px;
+    width: 80px;
+    border-radius: 5px;
+}
+
+.importedItem {
+    composes: importPanelItem;
+    margin-right: 10px;
+    position: relative;
+}
+
+.rmImportBtn {
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    background: red;
+    opacity: 0.7;
+    cursor: pointer;
+}
+.rmImportBtn:hover {
+    opacity: 1;
+}
+
+.importedImg {
+    composes: importPanelItem;
+    box-shadow: 1px 2px 4px 1px #bdb8b8;
+    object-fit: scale-down;
+    border: 1px solid #bbb;
+    background: url("../../images/checkerboard.png");
+    background-size: 80px;
+}
+
+.activeImportedImg {
+    composes: importedImg;
+    border: none;
+    box-shadow: 0px 0px 1px 4px cornflowerblue;
+}
+
+.importBtn {
+    composes: importPanelItem;
+    color: silver;
+    font-size: 80px;
+    opacity: 1;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+.importBtn:hover, .importBtn:focus, .importBtn:active {
+    opacity: 0.8;
+}
+
+.noImportsMsg {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #666;
+}

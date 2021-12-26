@@ -1,0 +1,9 @@
+.upperSection {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 0.5em 0;
+}
+.appbar {
+    width: 100%;
+}

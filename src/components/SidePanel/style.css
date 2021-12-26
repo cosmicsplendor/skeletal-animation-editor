@@ -1,0 +1,41 @@
+.input, .select, .slider {
+    width: 160px;
+    margin-bottom: 1em;
+}
+
+.dropDown {
+    width: 150px;
+}
+
+.sidePanel {
+    padding: 10px 20px;
+}
+
+.axnBtn {
+    margin-top: 1em;
+}
+
+.boneEditor {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: whitesmoke;
+    margin: 24px;
+    margin-left: 0;
+}
+
+.metaImage {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    background: url("../../images/checkerboard.png")
+}
+.sectionHeader {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+.multiplierInd {
+    font-size: 1.5em;
+    font-weight: bold;
+}
