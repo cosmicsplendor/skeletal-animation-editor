@@ -26,6 +26,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all 0.125s linear;
 }
 .playBtn:hover {
     color: white;
