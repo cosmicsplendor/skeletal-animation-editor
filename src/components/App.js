@@ -1,10 +1,11 @@
 import { PageHeader, Tag } from "antd"
 
 import Canvas from "./Canvas"
-import AnimStatesPanel from "./AnimStatesPanel"
+import RightSidePanel from "./RightSidePanel"
 import SidePanel from "./SidePanel"
 import ImportPanel from "./ImportPanel"
 import ClearBtn from "./ClearBtn"
+import DownloadBtn from "./DownloadBtn"
 import styles from "./style.css"
 
 const  App = () => {
@@ -18,7 +19,10 @@ const  App = () => {
                 // subTitle="made with"
                 // tags={<Tag color="blue">React.js</Tag>}
                 extra={
-                    <ClearBtn />
+                    <>
+                        <DownloadBtn />
+                        <ClearBtn />
+                    </>
                 }
                 className={styles.appbar}
             />
@@ -26,7 +30,7 @@ const  App = () => {
             <div className={styles.upperSection}>
                 <SidePanel />
                 <Canvas />
-                <AnimStatesPanel /> 
+                <RightSidePanel /> 
             </div>
         </div>
     )

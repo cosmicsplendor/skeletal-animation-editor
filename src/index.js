@@ -9,10 +9,11 @@ import useAnimStates from "./hooks/useAnimStates"
 const AppContainer = () => {
     const [ activeSprite, setActiveSprite ] = useState("")
     const [ activeAnimState, setActiveAnimState ] = useState("")
+    const [ data, setData ] = useState("")
     const { imports, importAxns } = useImport()
     const { animStates, animStateAxns } = useAnimStates()
     return (
-        <AppContext.Provider value={{ imports, importAxns, activeSprite, setActiveSprite, animStates, animStateAxns, activeAnimState, setActiveAnimState }} >
+        <AppContext.Provider value={{ imports, importAxns, activeSprite, setActiveSprite, animStates, animStateAxns, activeAnimState, setActiveAnimState, data, setData }} >
             <App />
         </AppContext.Provider>
     )

@@ -8,7 +8,7 @@ import { PREVIEW_ID } from "../../constants"
 
 
 export default () => {
-    const { imports, animStates, activeAnimState: activeAnimStateId, activeSprite } = useContext(AppContext)
+    const { imports, animStates, activeAnimState: activeAnimStateId, activeSprite, setData } = useContext(AppContext)
     const previewCanvasRef = useRef()
     const [ componentMounted, setComponentMounted ] = useState(false)
 
@@ -35,6 +35,19 @@ export default () => {
     useEffect(() => {
         if (!componentMounted) return
         if (!activeSprite || !activeAnimState) return skeletalAnimRenderer.clear()
+        setData(JSON.stringify({
+            bones: imports.map(im => {
+                const { name, startingPointInPx, endPointInPx, parent, zIndex } = im
+                return {
+                    name,
+                    startingPoint: startingPointInPx,
+                    endPoint: endPointInPx,
+                    parentName: parent,
+                    zIndex
+                }
+            }),
+            animStates: animStates
+        }))
         skeletalAnimRenderer.switchState(imports, activeAnimState, animStates)
     }, [ imports, activeAnimState, componentMounted, activeSprite, animStates ])
 

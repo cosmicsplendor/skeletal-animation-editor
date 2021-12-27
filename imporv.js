@@ -3,17 +3,17 @@ import { len, atan } from "@utils/math"
 import execTimer from "@utils/execTimer"
 
 const mapBoneToTexRegion = bone => {
-    const { name, startingPointInPx = { x: 0, y: 0 }, endPointInPx = { x: 0, y: 0 }, parent: parentBoneName, zIndex } = bone
+    const { name, startingPoint = { x: 0, y: 0 }, endPoint = { x: 0, y: 0 }, parentName, zIndex } = bone
     const texRegion = new TexRegion({ frame: "name" })
    
-    const boneVecX = endPointInPx ? endPointInPx.x - startingPointInPx.x: 0
-    const boneVecY = endPointInPx ? endPointInPx.y - startingPointInPx.y: 0
+    const boneVecX = endPoint ? endPoint.x - startingPoint.x: 0
+    const boneVecY = endPoint ? endPoint.y - startingPoint.y: 0
 
     texRegion.name = name
-    texRegion.anchor = { ...startingPointInPx }
+    texRegion.anchor = { ...startingPoint }
     texRegion.length = len(boneVecX, boneVecY)
     texRegion.angle = atan(boneVecY, boneVecX)
-    texRegion.parentBoneName = parentBoneName
+    texRegion.parentName = parentName
     texRegion.childBones = []
     texRegion.zIndex = zIndex
 
@@ -22,9 +22,9 @@ const mapBoneToTexRegion = bone => {
 
 const buildSkeletalSceneGraph = bones => {
     bones.forEach(bone => {
-        if (!bone.parentBoneName) return
+        if (!bone.parentName) return
         const parentBone = bones.find(({ name }) => {
-            return name === bone.parentBoneName
+            return name === bone.parentName
         })
         parentBone.childBones.push(bone)
     })
