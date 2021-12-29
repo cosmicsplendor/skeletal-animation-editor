@@ -29,7 +29,7 @@ const buildSkeletalSceneGraph = bones => {
         parentBone.childBones.push(bone)
     })
 
-    return bones.find(bone => bone.childBones.length && !bone.parent)
+    return bones.find(bone => bone.childBones.length && !bone.parentBoneName)
 }
 
 const calcAbsAngle = (boneName, animState, animStates) => {

@@ -64,8 +64,8 @@ export default () => {
                     <Space direction="vertical">
                         <Text type="secondary">anim period and delay</Text>
                         <Space>
-                            <Input className={styles.input} addonBefore="period" value={period} addonAfter="s" onChange={e => updateOpts({ period: Number.parseFloat(e.target.value || 0) })} disabled={inputsDisabled}/>
-                            <Input className={styles.input} addonBefore="delay" value={delay} addonAfter="s" onChange={e => updateOpts({ delay: Number.parseFloat(e.target.value || 0)})} disabled={inputsDisabled}/>
+                            <Input className={styles.input} type="number" step="0.1" addonBefore="period" value={period} addonAfter="s" onChange={e => updateOpts({ period: Number.parseFloat(e.target.value || 0) })} disabled={inputsDisabled}/>
+                            <Input className={styles.input} type="number" step="0.1" addonBefore="delay" value={delay} addonAfter="s" onChange={e => updateOpts({ delay: Number.parseFloat(e.target.value || 0)})} disabled={inputsDisabled}/>
                         </Space>
                     </Space>
                 </div>

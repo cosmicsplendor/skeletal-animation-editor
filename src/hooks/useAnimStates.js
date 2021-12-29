@@ -84,7 +84,7 @@ export default () => {
                     return {
                         imports: {
                             ...imports,
-                            [payload.name]: { payload, ...getDefaultImportOpt() }
+                            [payload.name]: { ...getDefaultImportOpt() }
                         },
                         ...rest
                     }

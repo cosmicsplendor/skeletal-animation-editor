@@ -56,7 +56,7 @@ export default canvas => {
             texHash[tex.parentBoneName].childBones.push(tex)
         })
 
-        return textures.find(tex => tex.childBones.length && !tex.parent)
+        return textures.find(tex => tex.childBones.length && !tex.parentBoneName)
     }
     const addRecursively = bone => {
         sceneGraph.add(bone)
@@ -93,7 +93,6 @@ export default canvas => {
             const syncBones = () => {
                 syncRecursively(skeletalSceneGraph, { ...globalAnchorPos }, globalAngularPos)
             }
-
             if (!skeletalSceneGraph) return
             // addRecursively(skeletalSceneGraph)
             textures.reverse().sort((a, b) => {
