@@ -1,4 +1,4 @@
-export const rand = (to, from = 0) => from + Math.floor((to - from + 1)* Math.random())
+export const rand = (to, from = 0) => from + Math.floor((to - from + 1) * Math.random())
 
 export const randf = (to, from = 0) => from + (to - from) * Math.random()
 
@@ -25,7 +25,7 @@ export const sqLen = (x, y) => x * x + y * y
 
 export const calcNormal = (x, y) => {
     const length = len(x, y)
-    return { x: y / length, y: -x / length}
+    return { x: y / length, y: -x / length }
 }
 
 export const normalize = (x, y) => {
@@ -34,49 +34,159 @@ export const normalize = (x, y) => {
 }
 
 export const easingFns = {
+    // Linear
     linear(x) {
-        return x
+        return x;
     },
+
+    // Quadratic
     quadIn(x) {
-        return  x * x
+        return x * x;
     },
     quadOut(x) {
-        return 1 - this.quadIn(x - 1)
+        return 1 - quadIn(1 - x);
     },
+    quadInOut(x) {
+        return x < 0.5 ? 2 * x * x : 1 - 2 * Math.pow(x - 1, 2);
+    },
+
+    // Cubic
     cubicIn(x) {
-        return x * x * x
+        return x * x * x;
     },
     cubicOut(x) {
-        return 1 - this.cubicIn(1 - x)
+        return 1 - cubicIn(1 - x);
     },
-    smoothStep(x) {
-        return x * x * (3 - 2 * x)
+    cubicInOut(x) {
+        return x < 0.5 ? 4 * x * x * x : 1 - 4 * Math.pow(x - 1, 3);
     },
-    sin(x) {
-        return Math.sin(Math.PI * 0.5 * x)
+
+    // Quartic
+    quartIn(x) {
+        return x * x * x * x;
+    },
+    quartOut(x) {
+        return 1 - quartIn(1 - x);
+    },
+    quartInOut(x) {
+        return x < 0.5 ? 8 * x * x * x * x : 1 - 8 * Math.pow(x - 1, 4);
+    },
+
+    // Quintic
+    quintIn(x) {
+        return x * x * x * x * x;
+    },
+    quintOut(x) {
+        return 1 - quintIn(1 - x);
+    },
+    quintInOut(x) {
+        return x < 0.5 ? 16 * x * x * x * x * x : 1 - 16 * Math.pow(x - 1, 5);
+    },
+
+    // Sine
+    sineIn(x) {
+        return 1 - Math.cos(x * Math.PI / 2);
+    },
+    sineOut(x) {
+        return Math.sin(x * Math.PI / 2);
+    },
+    sineInOut(x) {
+        return 0.5 * (1 - Math.cos(Math.PI * x));
+    },
+
+    // Exponential
+    expoIn(x) {
+        return x === 0 ? 0 : Math.pow(2, 10 * (x - 1));
+    },
+    expoOut(x) {
+        return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+    },
+    expoInOut(x) {
+        return x === 0 ? 0 : x === 1 ? 1 : x < 0.5 ? Math.pow(2, 20 * x - 10) / 2 : (2 - Math.pow(2, -20 * (x - 1))) / 2;
+    },
+
+    // Circular
+    circIn(x) {
+        return 1 - Math.sqrt(1 - x * x);
+    },
+    circOut(x) {
+        return Math.sqrt(1 - Math.pow(x - 1, 2));
+    },
+    circInOut(x) {
+        return x < 0.5 ? (1 - Math.sqrt(1 - Math.pow(2 * x, 2))) / 2 : (Math.sqrt(1 - Math.pow(-2 * x + 2, 2)) + 1) / 2;
+    },
+
+    // Elastic
+    elasticIn(x) {
+        return x === 0 ? 0 : x === 1 ? 1 : -Math.pow(2, 10 * (x - 1)) * Math.sin((x - 1.1) * 5 * Math.PI);
+    },
+    elasticOut(x) {
+        return x === 0 ? 0 : x === 1 ? 1 : Math.pow(2, -10 * x) * Math.sin((x - 0.1) * 5 * Math.PI) + 1;
+    },
+    elasticInOut(x) {
+        return x === 0 ? 0 : x === 1 ? 1 : x < 0.5
+            ? -0.5 * Math.pow(2, 20 * x - 10) * Math.sin((20 * x - 11) * Math.PI / 5)
+            : 0.5 * Math.pow(2, -20 * x + 10) * Math.sin((20 * x - 11) * Math.PI / 5) + 1;
+    },
+
+    // Back
+    backIn(x) {
+        const s = 1.70158;
+        return x * x * ((s + 1) * x - s);
+    },
+    backOut(x) {
+        const s = 1.70158;
+        return (x - 1) * (x - 1) * ((s + 1) * (x - 1) + s) + 1;
+    },
+    backInOut(x) {
+        const s = 1.70158 * 1.525;
+        return x < 0.5
+            ? 0.5 * (x * x * ((s + 1) * 2 * x - s) - 1)
+            : 0.5 * ((2 * x - 2) * (2 * x - 2) * ((s + 1) * (2 * x - 2) + s) + 2);
+    },
+
+    // Bounce
+    bounceIn(x) {
+        return 1 - bounceOut(1 - x);
+    },
+    bounceOut(x) {
+        if (x < (1 / 2.75)) {
+            return 7.5625 * x * x;
+        } else if (x < (2 / 2.75)) {
+            return 7.5625 * (x - 1.5 / 2.75) * (x - 1.5 / 2.75) + 0.75;
+        } else if (x < (2.5 / 2.75)) {
+            return 7.5625 * (x - 2.25 / 2.75) * (x - 2.25 / 2.75) + 0.9375;
+        } else {
+            return 7.5625 * (x - 2.625 / 2.75) * (x - 2.625 / 2.75) + 0.984375;
+        }
+    },
+    bounceInOut(x) {
+        return x < 0.5
+            ? (1 - bounceOut(1 - 2 * x)) / 2
+            : (1 + bounceOut(2 * x - 1)) / 2;
     }
-}
+};
 
 export const fixedAabb = (b1, b2) => {
     if (
-        stripFloat(b1.x + b1.width, 10000) <= stripFloat(b2.x, 10000) || 
+        stripFloat(b1.x + b1.width, 10000) <= stripFloat(b2.x, 10000) ||
         stripFloat(b1.x, 10000) >= stripFloat(b2.x + b2.width, 10000) ||
         stripFloat(b1.y + b1.height, 10000) <= stripFloat(b2.y, 10000) ||
         stripFloat(b1.y, 10000) >= stripFloat(b2.y + b2.height, 10000)
     ) {
-            return false
+        return false
     }
     return true
 }
 
 export const aabb = (b1, b2) => {
     if (
-        b1.x + b1.width <= b2.x || 
+        b1.x + b1.width <= b2.x ||
         b1.x >= b2.x + b2.width ||
         b1.y + b1.height <= b2.y ||
         b1.y >= b2.y + b2.height
     ) {
-            return false
+        return false
     }
     return true
 }
@@ -93,7 +203,7 @@ export const aabbCirc = (rectBounds, circBounds) => {
     const closestDistX = circBounds.x + circBounds.radius - clamp(rectBounds.x, rectBounds.x + rectBounds.width, circBounds.x + circBounds.radius)
     const closestDistY = circBounds.y + circBounds.radius - clamp(rectBounds.y, rectBounds.y + rectBounds.height, circBounds.y + circBounds.radius)
 
-    
+
     const sqClosestDist = closestDistX * closestDistX + closestDistY * closestDistY
     return Math.round(sqClosestDist) < circBounds.radius * circBounds.radius
 }
