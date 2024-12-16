@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open --watch",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack serve --open --watch"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
     "antd": "^4.10.3",
+    "postcss": "^8.4.49",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "uuid": "^8.3.2"

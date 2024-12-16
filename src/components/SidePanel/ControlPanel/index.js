@@ -25,6 +25,7 @@ export default () => {
         })
     }, [ activeSpriteId, activeAnimStateId ])
     const inputsDisabled = !activeAnimState || !activeSprite
+    console.log(activeSprite)
     const easingFn = inputsDisabled ? easingFnOpts[0]: activeAnimState.imports[activeSprite.name].easingFn
     const period = inputsDisabled ? 1: activeAnimState.imports[activeSprite.name].period
     const delay = inputsDisabled ? 0: activeAnimState.imports[activeSprite.name].delay
