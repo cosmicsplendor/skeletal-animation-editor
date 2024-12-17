@@ -1,7 +1,9 @@
 import { useContext, useCallback } from 'react';
 import { DownloadOutlined } from '@ant-design/icons';
-import download from 'downloadjs';
-import AppContext from './AppContext'; // Assuming your data is in AppContext
+import * as download from '../utils/download';
+import AppContext from '../AppContext'; // Assuming your data is in AppContext
+import { Button } from 'antd';
+import styles from "./style.css"
 
 export default () => {
   const { data } = useContext(AppContext);
