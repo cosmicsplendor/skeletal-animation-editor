@@ -7,7 +7,6 @@ import styles from "./style.css"
 
 export default () => {
   const { data } = useContext(AppContext);
-  console.log({ data })
   const downloadData = useCallback(() => {
     // Deep copy the data to avoid modifying the original state
     const dataToDownload = JSON.parse(data);

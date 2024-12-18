@@ -46,6 +46,9 @@ export const easingFns = {
     quadOut(x) {
         return 1 - quadIn(1 - x);
     },
+    smoothstep(x) {
+        return x * x * (3 - 2 * x);
+    },
     quadInOut(x) {
         return x < 0.5 ? 2 * x * x : 1 - 2 * Math.pow(x - 1, 2);
     },
