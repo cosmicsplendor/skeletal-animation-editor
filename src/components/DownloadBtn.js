@@ -7,10 +7,10 @@ import styles from "./style.css"
 
 export default () => {
   const { data } = useContext(AppContext);
-
+  console.log({ data })
   const downloadData = useCallback(() => {
     // Deep copy the data to avoid modifying the original state
-    const dataToDownload = JSON.parse(JSON.stringify(data));
+    const dataToDownload = JSON.parse(data);
 
     // Convert degrees to radians in the 'animStates' array
     dataToDownload.animStates.forEach(animState => {
