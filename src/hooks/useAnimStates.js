@@ -17,7 +17,7 @@ const axnTypes = Object.freeze({
 export const easingFns = Object.keys(math.easingFns)
 export const getDefaultImportOpt = () => ({
     delAngularPos: 0,
-    easingFn: easingFns[0],
+    easingFn: "smoothstep",
     delay: 0,
     period: 1,
     angleMultiplier: 1
