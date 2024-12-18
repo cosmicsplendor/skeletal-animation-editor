@@ -44,7 +44,7 @@ export const easingFns = {
         return x * x;
     },
     quadOut(x) {
-        return 1 - quadIn(1 - x);
+        return 1 - this.quadIn(1 - x);
     },
     smoothstep(x) {
         return x * x * (3 - 2 * x);
@@ -58,7 +58,7 @@ export const easingFns = {
         return x * x * x;
     },
     cubicOut(x) {
-        return 1 - cubicIn(1 - x);
+        return 1 - this.cubicIn(1 - x);
     },
     cubicInOut(x) {
         return x < 0.5 ? 4 * x * x * x : 1 - 4 * Math.pow(x - 1, 3);
@@ -69,7 +69,7 @@ export const easingFns = {
         return x * x * x * x;
     },
     quartOut(x) {
-        return 1 - quartIn(1 - x);
+        return 1 - this.quartIn(1 - x);
     },
     quartInOut(x) {
         return x < 0.5 ? 8 * x * x * x * x : 1 - 8 * Math.pow(x - 1, 4);
@@ -80,7 +80,7 @@ export const easingFns = {
         return x * x * x * x * x;
     },
     quintOut(x) {
-        return 1 - quintIn(1 - x);
+        return 1 - this.quintIn(1 - x);
     },
     quintInOut(x) {
         return x < 0.5 ? 16 * x * x * x * x * x : 1 - 16 * Math.pow(x - 1, 5);
@@ -150,7 +150,7 @@ export const easingFns = {
 
     // Bounce
     bounceIn(x) {
-        return 1 - bounceOut(1 - x);
+        return 1 - this.bounceOut(1 - x);
     },
     bounceOut(x) {
         if (x < (1 / 2.75)) {
@@ -165,8 +165,8 @@ export const easingFns = {
     },
     bounceInOut(x) {
         return x < 0.5
-            ? (1 - bounceOut(1 - 2 * x)) / 2
-            : (1 + bounceOut(2 * x - 1)) / 2;
+            ? (1 - this.bounceOut(1 - 2 * x)) / 2
+            : (1 + this.bounceOut(2 * x - 1)) / 2;
     }
 };
 
