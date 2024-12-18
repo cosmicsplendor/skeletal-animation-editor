@@ -31,7 +31,8 @@ export default () => {
                 }
                 return [ newImport, ...prevImports ]
             case importAxnTypes.update:
-                return prevImports.map(imp => imp.id === payload.id ? { ...imp, ...payload }: imp)
+                const returnVal =  prevImports.map(imp => imp.id === payload.id ? { ...imp, ...payload }: imp)
+                return returnVal
             case importAxnTypes.remove:
                 return prevImports.filter(({ id }) => id !== payload.id)
             case importAxnTypes.clear:

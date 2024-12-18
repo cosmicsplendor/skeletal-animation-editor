@@ -50,13 +50,15 @@ export default canvas => {
             hash[tex.name] = tex
             return hash
         }, {})
-
         textures.forEach(tex => {
             if (!tex.parentBoneName) return
-            texHash[tex.parentBoneName].childBones.push(tex)
+            if (texHash[tex.parentBoneName]) {
+                texHash[tex.parentBoneName].childBones.push(tex)
+            }
         })
 
-        return textures.find(tex => tex.childBones.length && !tex.parentBoneName)
+        const returnVal = textures.find(tex => tex.childBones.length && !tex.parentBoneName)
+        return returnVal
     }
     const addRecursively = bone => {
         sceneGraph.add(bone)
@@ -71,12 +73,11 @@ export default canvas => {
         bone.rotation = angularPos + globalAngularPos
 
         const netAngle = bone.angle + bone.rotation * (Math.PI / 180)
-
-        globalAnchorPos.x += bone.length * Math.cos(netAngle)
-        globalAnchorPos.y += bone.length * Math.sin(netAngle)
-        
-        bone.childBones.forEach(childBone => {
-            syncRecursively(childBone, globalAnchorPos, bone.rotation)
+        const newGlobalPos = {...globalAnchorPos}
+        newGlobalPos.x += bone.length * Math.cos(netAngle)
+        newGlobalPos.y += bone.length * Math.sin(netAngle)
+        bone.childBones.forEach((childBone, i) => {
+            syncRecursively(childBone, newGlobalPos, bone.rotation)
         })
     }
     registerRootNodeToTimer(sceneGraph)
@@ -99,7 +100,7 @@ export default canvas => {
                 const aZIndex = a.zIndex || 0
                 const bZIndex = b.zIndex || 0
                 return aZIndex - bZIndex
-            }).forEach(texture => {
+            }).forEach((texture, i) => {
                 sceneGraph.add(texture)
             })
             syncBones()
