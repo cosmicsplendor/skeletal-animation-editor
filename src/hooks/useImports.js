@@ -31,14 +31,15 @@ export default () => {
                 }
                 return [ newImport, ...prevImports ]
             case importAxnTypes.dupe:
-                const dupe = perveImports.find(imp => imp.id === payload.id).name
-                const name = dupe.split("_dupe")[0]
+                const dupe = prevImports.find(imp => imp.id === payload.id)
+                const basename = dupe.name
+                const name = basename.split("_d1")[0]
                 const maxDupeIdx = prevImports.reduce((max, imp) => {
-                    const [ curName, curIdx ] = imp.name.split("_dupe")
-                    const idx = curName === name ? Number(curIdx): 0
+                    const [ curName, curIdx ] = imp.name.split("_d1")
+                    const idx = curName === name ? Number(curIdx || 0): 0
                     return Math.max(idx, max)
                 }, 0)
-                return [ { ...dupe, name: `${name}_dupe${maxDupeIdx+1}`, id: v4() }]
+                return [ { ...dupe, name: `${name}_d1${maxDupeIdx+1}`, id: v4() }, ...prevImports ]
             case importAxnTypes.update:
                 const returnVal =  prevImports.map(imp => imp.id === payload.id ? { ...imp, ...payload }: imp)
                 return returnVal
@@ -72,6 +73,10 @@ export default () => {
         setImports({ type: importAxnTypes.add, payload: item })
     }, [])
 
+    const duplicate = useCallback(payload => {
+        setImports({ type: importAxnTypes.dupe, payload })
+    }, [])
+    
     const update = useCallback(payload => {
         setImports({ type: importAxnTypes.update, payload })
     }, [])
@@ -95,7 +100,8 @@ export default () => {
             update,
             remove,
             clear,
-            updatePoints
+            updatePoints,
+            duplicate
         }
     }
 }
