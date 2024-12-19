@@ -12,6 +12,7 @@ export default () => {
         if (!activeAnimState) return
         const name = prompt("Enter Animation State Name")
         if (!name) return
+        console.log(activeAnimState.imports)
         animStateAxns.add({
             parentId: activeAnimStateId,
             name: name,
@@ -27,6 +28,7 @@ export default () => {
         // that's about it
         // and oh the final touch make the meta downloadable
         // and integrate this good stuff with the library
+        setActiveAnimStateId(null)
         if (!activeAnimState) return
         animStateAxns.remove({
             id: activeAnimStateId
