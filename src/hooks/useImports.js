@@ -30,6 +30,15 @@ export default () => {
                     ...payload,
                 }
                 return [ newImport, ...prevImports ]
+            case importAxnTypes.dupe:
+                const dupe = perveImports.find(imp => imp.id === payload.id).name
+                const name = dupe.split("_dupe")[0]
+                const maxDupeIdx = prevImports.reduce((max, imp) => {
+                    const [ curName, curIdx ] = imp.name.split("_dupe")
+                    const idx = curName === name ? Number(curIdx): 0
+                    return Math.max(idx, max)
+                }, 0)
+                return [ { ...dupe, name: `${name}_dupe${maxDupeIdx+1}`, id: v4() }]
             case importAxnTypes.update:
                 const returnVal =  prevImports.map(imp => imp.id === payload.id ? { ...imp, ...payload }: imp)
                 return returnVal
