@@ -9,6 +9,7 @@ import { EDITOR_W } from "../../constants"
 
 import Bone from "./Bone"
 import { CopyOutlined, DownloadOutlined } from "@ant-design/icons"
+import { v4 } from "uuid"
 
 const hitboxEditorImgStyle = {
     width: EDITOR_W,
@@ -19,7 +20,7 @@ const { Text } = Typography
 const { Option } = Select
 
 export default () => {
-    const { activeSprite: activeSpriteID, imports, importAxns } = useContext(AppContext)
+    const { activeSprite: activeSpriteID, imports, importAxns, animStateAxns } = useContext(AppContext)
     const [editingBone, setEditingBone] = useState(false)
     const hbEditorRef = useRef()
     const computePoint = useMemo(() => {
@@ -136,7 +137,17 @@ export default () => {
             <div>
                 {
                     name && <Button className={styles.downloadBtn} onClick={() => {
-                        importAxns.duplicate({ id: activeSpriteID })
+                        const dupe = imports.find(imp => imp.id === activeSpriteID)
+                        const name = dupe.name
+                        const basename = name.split("_d1")[0]
+                        const maxDupeIdx = imports.reduce((max, imp) => {
+                            const [ curName, curIdx ] = imp.name.split("_d1")
+                            const idx = curName === name ? Number(curIdx || 0): 0
+                            return Math.max(idx, max)
+                        }, 0)
+                        const dupeImport = { ...dupe, name: `${basename}_d1${maxDupeIdx+1}`, id: v4() }
+                        importAxns.add(dupeImport)
+                        animStateAxns.addImport(dupeImport)
                     }} icon={<CopyOutlined />}>
                         <span>Clone</span> <strong> {name}</strong>
                     </Button>

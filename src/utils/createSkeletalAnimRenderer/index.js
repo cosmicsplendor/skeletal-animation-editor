@@ -12,6 +12,7 @@ export default canvas => {
         const parentState = animStates.find(state => {
             return animState.parentId === state.id
         })
+        console.log(animState)
         const { delAngularPos, angleMultiplier } = animState.imports[spriteName]
         const curAngle = delAngularPos * angleMultiplier
         if (!parentState) return curAngle
